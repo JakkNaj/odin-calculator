@@ -1,12 +1,17 @@
 let firstNumSelected = false;
 let firstNum = "";
-let operator;
+let operator = "";
 let secondNum = "";
 
 let display = document.getElementById("display");
 let clearBtn = document.getElementById("ac");
+let plusMinusBtn = document.getElementById("plus-minus");
+let percentBtn = document.getElementById("percent");
 let numbers = document.querySelectorAll(".number");
 let addition = document.getElementById("addition");
+let subtraction = document.getElementById("subtraction");
+let multiplication = document.getElementById("multiply");
+let division = document.getElementById("division");
 let equals = document.getElementById("equals");
 
 function add(x, y){
@@ -38,6 +43,10 @@ function showToDisplay(output){
 
 clearBtn.addEventListener("click", () => {
     display.textContent = "";
+    firstNumSelected = false;
+    firstNum = "";
+    operator = "";
+    secondNum = "";
 })
 
 //give event listeners to numbers
@@ -62,6 +71,52 @@ addition.addEventListener("click", () => {
     }
 })
 
+subtraction.addEventListener("click", () => {
+    if (firstNum !== ""){
+        firstNumSelected = true;
+        operator = '-';
+        showToDisplay("-");
+    }
+})
+
+multiplication.addEventListener("click", () => {
+    if (firstNum !== ""){
+        firstNumSelected = true;
+        operator = '*';
+        showToDisplay("*");
+    }
+})
+
+division.addEventListener("click", () => {
+    if (firstNum !== ""){
+        firstNumSelected = true;
+        operator = '/';
+        showToDisplay("/");
+    }
+})
+
 equals.addEventListener("click", () => {
-    showToDisplay(operate(operator, parseInt(firstNum), parseInt(secondNum)));
+    console.log(firstNum +" "+ operator +" "+ secondNum);
+    firstNum = Math.round(operate(operator, parseInt(firstNum), parseInt(secondNum)).toString() * 10) / 10;
+    showToDisplay(firstNum);
+    operator = "";
+    secondNum = "";
+})
+
+plusMinusBtn.addEventListener("click", () => {
+    if (operator === "" && firstNum !== ""){
+        if (parseInt(firstNum) >= 0) {
+            firstNum = "-" + firstNum;
+        } else {
+            firstNum = Math.abs(parseInt(firstNum)).toString();
+        }
+        showToDisplay(firstNum);
+    } else if (secondNum !== ""){
+        if (parseInt(secondNum) >= 0) {
+            secondNum = "-" + secondNum;
+        } else {
+            secondNum = Math.abs(parseInt(secondNum)).toString();
+        }
+        showToDisplay(secondNum);
+    }
 })
