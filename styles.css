@@ -27,6 +27,8 @@ body {
     height: 100px;
     border: 2px solid saddlebrown;
     border-radius: 5px;
+    font-size: 5em;
+    text-align: end;
 }
 
 .button-row {
@@ -58,3 +60,4 @@ button {
 .function {
     background-color: cornflowerblue;
 }
+
